@@ -13,7 +13,6 @@ import java.util.List;
 
 public class ParseConverter {
     private ParseConverter() {
-
     }
 
     public static Worker toWorker(ParseObject parseObject) {
@@ -26,8 +25,7 @@ public class ParseConverter {
             worker.setPhotoUrl(parseFileProfilePic.getUrl());
         }
         worker.setLocation(parseObject.getString(ParseConstants.Worker.FIELD_LOCATION));
-
-        // TODO
+        worker.setDescription(parseObject.getString(ParseConstants.Worker.FIELD_DESCRIPTION));
         List<String> credentials = parseObject.getList(ParseConstants.Worker.FIELD_CREDENTIALS);
         worker.setCredentials(credentials);
         return worker;

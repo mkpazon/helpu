@@ -80,6 +80,7 @@ public class ListingFragment extends Fragment implements ListingView, ListingAda
     @Override
     public void startDetailsActivity(Worker worker) {
         Intent intent = new Intent(getActivity(), DetailsActivity.class);
+        intent.putExtra(DetailsActivity.EXTRA_WORKER, worker);
         startActivity(intent);
     }
 

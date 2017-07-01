@@ -5,7 +5,7 @@ package com.mamaai.angelhack2017;
  */
 
 public class ParseConstants {
-
+    public static final String OBJECT_ID = "objectId";
     public static class Worker {
         public static final String TYPE = "Worker";
         public static final String FIELD_NAME = "name";
@@ -14,6 +14,7 @@ public class ParseConstants {
         public static final String FIELD_LOCATION = "location";
         public static final String FIELD_SKILLS = "skills";
         public static final String FIELD_CREDENTIALS = "credentials";
+        public static final String FIELD_DESCRIPTION = "description";
     }
 
     public static class Skill {

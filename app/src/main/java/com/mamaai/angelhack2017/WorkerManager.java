@@ -1,5 +1,6 @@
 package com.mamaai.angelhack2017;
 
+import com.mamaai.angelhack2017.model.Skill;
 import com.mamaai.angelhack2017.model.Worker;
 import com.mamaai.angelhack2017.util.ParseConverter;
 import com.parse.FindCallback;
@@ -39,6 +40,32 @@ public class WorkerManager {
                         }
                         emitter.onNext(workers);
                         emitter.onComplete();
+                    }
+                });
+            }
+        });
+    }
+
+
+    public static Observable<List<Skill>> retrieveSkills(final String workerId) {
+        Timber.d(".retrieveWorkers");
+        return Observable.create(new ObservableOnSubscribe<List<Skill>>() {
+            @Override
+            public void subscribe(@NonNull final ObservableEmitter<List<Skill>> emitter) throws Exception {
+                ParseObject worker = ParseObject.createWithoutData(ParseConstants.Skill.TYPE, workerId);
+                ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseConstants.Skill.TYPE);
+                query.whereEqualTo(ParseConstants.Skill.FIELD_WORKER, worker);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> parseObjects, ParseException e) {
+                        Timber.d(".retrieveWorkers -> .done");
+                        List<Skill> skills = new ArrayList<>();
+                        for (ParseObject parseObject : parseObjects) {
+//                            Worker worker = ParseConverter.toWorker(parseObject);
+//                            workers.add(worker);
+                        }
+//                        emitter.onNext(workers);
+//                        emitter.onComplete();
                     }
                 });
             }

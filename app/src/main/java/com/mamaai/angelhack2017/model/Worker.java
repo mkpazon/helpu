@@ -1,5 +1,8 @@
 package com.mamaai.angelhack2017.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +10,54 @@ import java.util.List;
  * Created by mkpazon on 01/07/2017.
  */
 
-public class Worker {
+public class Worker implements Parcelable {
     private String name;
     private int age;
     private String photoUrl;
-    private List<String> skills = new ArrayList<>();
+    private List<Skill> skills = new ArrayList<>();
     private List<String> credentials = new ArrayList<>();
     private String location;
+    private String description;
+
+    public Worker() {
+
+    }
+
+    protected Worker(Parcel in) {
+        name = in.readString();
+        age = in.readInt();
+        photoUrl = in.readString();
+        credentials = in.createStringArrayList();
+        location = in.readString();
+        description = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeInt(age);
+        dest.writeString(photoUrl);
+        dest.writeStringList(credentials);
+        dest.writeString(location);
+        dest.writeString(description);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Worker> CREATOR = new Creator<Worker>() {
+        @Override
+        public Worker createFromParcel(Parcel in) {
+            return new Worker(in);
+        }
+
+        @Override
+        public Worker[] newArray(int size) {
+            return new Worker[size];
+        }
+    };
 
     public void setName(String name) {
         this.name = name;
@@ -47,8 +91,12 @@ public class Worker {
         return photoUrl;
     }
 
-    public List<String> getSkills() {
+    public List<Skill> getSkills() {
         return skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
     }
 
     public List<String> getCredentials() {
@@ -59,7 +107,12 @@ public class Worker {
         this.credentials = credentials;
     }
 
-    public void setSkills(List<String> skills) {
-        this.skills = skills;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
