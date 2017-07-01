@@ -52,20 +52,23 @@ public class WorkerManager {
         return Observable.create(new ObservableOnSubscribe<List<Skill>>() {
             @Override
             public void subscribe(@NonNull final ObservableEmitter<List<Skill>> emitter) throws Exception {
-                ParseObject worker = ParseObject.createWithoutData(ParseConstants.Skill.TYPE, workerId);
+                ParseObject worker = ParseObject.createWithoutData(ParseConstants.Worker.TYPE, workerId);
                 ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseConstants.Skill.TYPE);
                 query.whereEqualTo(ParseConstants.Skill.FIELD_WORKER, worker);
+                query.include(ParseConstants.Skill.FIELD_WORKER);
                 query.findInBackground(new FindCallback<ParseObject>() {
                     @Override
                     public void done(List<ParseObject> parseObjects, ParseException e) {
                         Timber.d(".retrieveWorkers -> .done");
                         List<Skill> skills = new ArrayList<>();
-                        for (ParseObject parseObject : parseObjects) {
-//                            Worker worker = ParseConverter.toWorker(parseObject);
-//                            workers.add(worker);
+                        if (parseObjects != null) {
+                            for (ParseObject parseObject : parseObjects) {
+                                Skill skill = ParseConverter.toSkill(parseObject);
+                                skills.add(skill);
+                            }
+                            emitter.onNext(skills);
                         }
-//                        emitter.onNext(workers);
-//                        emitter.onComplete();
+                        emitter.onComplete();
                     }
                 });
             }

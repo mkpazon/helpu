@@ -11,6 +11,7 @@ import java.util.List;
  */
 
 public class Worker implements Parcelable {
+    private String id;
     private String name;
     private int age;
     private String photoUrl;
@@ -23,7 +24,9 @@ public class Worker implements Parcelable {
 
     }
 
+
     protected Worker(Parcel in) {
+        id = in.readString();
         name = in.readString();
         age = in.readInt();
         photoUrl = in.readString();
@@ -34,6 +37,7 @@ public class Worker implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeString(name);
         dest.writeInt(age);
         dest.writeString(photoUrl);
@@ -58,6 +62,14 @@ public class Worker implements Parcelable {
             return new Worker[size];
         }
     };
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public void setName(String name) {
         this.name = name;
