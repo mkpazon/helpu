@@ -1,5 +1,6 @@
 package com.mamaai.angelhack2017;
 
+import com.mamaai.angelhack2017.model.Customer;
 import com.mamaai.angelhack2017.model.Skill;
 import com.mamaai.angelhack2017.model.Worker;
 import com.mamaai.angelhack2017.util.ParseConverter;
@@ -7,10 +8,15 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableEmitter;
+import io.reactivex.CompletableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -68,6 +74,32 @@ public class WorkerManager {
                             }
                             emitter.onNext(skills);
                         }
+                        emitter.onComplete();
+                    }
+                });
+            }
+        });
+    }
+
+    public static Completable bookSchedule(final Worker worker, final Customer customer, final Skill skill, final Calendar calendar, final String message) {
+        Timber.d(".bookSchedule");
+        return Completable.create(new CompletableOnSubscribe() {
+            @Override
+            public void subscribe(@NonNull final CompletableEmitter emitter) throws Exception {
+                ParseObject parseWorker = ParseObject.createWithoutData(ParseConstants.Worker.TYPE, worker.getId());
+                ParseObject parseCustomer = ParseObject.createWithoutData(ParseConstants.Customer.TYPE, customer.getId());
+                ParseObject parseSkill = ParseObject.createWithoutData(ParseConstants.Skill.TYPE, skill.getId());
+                ParseObject parseSchedule = new ParseObject(ParseConstants.Schedule.TYPE);
+                parseSchedule.put(ParseConstants.Schedule.FIELD_DATETIME, calendar.getTime());
+                parseSchedule.put(ParseConstants.Schedule.FIELD_CUSTOMER, parseCustomer);
+                parseSchedule.put(ParseConstants.Schedule.FIELD_WORKER, parseWorker);
+                parseSchedule.put(ParseConstants.Schedule.FIELD_SKILL, parseSkill);
+                parseSchedule.put(ParseConstants.Schedule.FIELD_MESSAGE, message);
+
+                parseSchedule.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        Timber.i(".saveInBackground");
                         emitter.onComplete();
                     }
                 });

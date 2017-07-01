@@ -1,11 +1,13 @@
 package com.mamaai.angelhack2017.details;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,12 +15,14 @@ import com.mamaai.angelhack2017.R;
 import com.mamaai.angelhack2017.WorkerManager;
 import com.mamaai.angelhack2017.model.Skill;
 import com.mamaai.angelhack2017.model.Worker;
+import com.mamaai.angelhack2017.schedule.ScheduleActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -53,6 +57,9 @@ public class DetailsFragment extends Fragment {
 
     @BindView(R.id.layout_services)
     LinearLayout mLayoutServices;
+
+    @BindView(R.id.button_hire)
+    Button mBtnHire;
 
     private Worker mWorker;
 
@@ -106,9 +113,11 @@ public class DetailsFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<Skill>>() {
                     @Override
-                    public void onNext(@NonNull List<Skill> workers) {
+                    public void onNext(@NonNull List<Skill> skills) {
                         Timber.d(".onNext");
-                        populateRecyclerView(workers);
+                        mWorker.setSkills(skills);
+                        populateRecyclerView(skills);
+                        mBtnHire.setEnabled(true);
                     }
 
                     @Override
@@ -124,7 +133,6 @@ public class DetailsFragment extends Fragment {
     }
 
     private void populateRecyclerView(List<Skill> skills) {
-
         for (Skill skill : skills) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_services, mLayoutServices, false);
             TextView tvSkillName = (TextView) view.findViewById(R.id.textView_skillName);
@@ -133,5 +141,13 @@ public class DetailsFragment extends Fragment {
             tvPrice.setText(String.valueOf(skill.getPrice()));
             mLayoutServices.addView(view);
         }
+    }
+
+    @OnClick(R.id.button_hire)
+    public void onClickHire() {
+        Timber.d(".onClickHire");
+        Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+        intent.putExtra(ScheduleActivity.EXTRA_WORKER, mWorker);
+        startActivity(intent);
     }
 }

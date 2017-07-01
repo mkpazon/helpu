@@ -3,33 +3,26 @@ package com.mamaai.angelhack2017.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by mkpazon on 01/07/2017.
  */
 
-public class Worker implements Parcelable {
+public class Customer implements Parcelable {
     private String id;
     private String name;
     private int age;
     private String photoUrl;
-    private List<Skill> skills = new ArrayList<>();
-    private List<String> credentials = new ArrayList<>();
     private String location;
     private String description;
 
-    public Worker() {
+    public Customer() {
     }
 
-    protected Worker(Parcel in) {
+    protected Customer(Parcel in) {
         id = in.readString();
         name = in.readString();
         age = in.readInt();
         photoUrl = in.readString();
-        skills = in.createTypedArrayList(Skill.CREATOR);
-        credentials = in.createStringArrayList();
         location = in.readString();
         description = in.readString();
     }
@@ -40,8 +33,6 @@ public class Worker implements Parcelable {
         dest.writeString(name);
         dest.writeInt(age);
         dest.writeString(photoUrl);
-        dest.writeTypedList(skills);
-        dest.writeStringList(credentials);
         dest.writeString(location);
         dest.writeString(description);
     }
@@ -51,15 +42,15 @@ public class Worker implements Parcelable {
         return 0;
     }
 
-    public static final Creator<Worker> CREATOR = new Creator<Worker>() {
+    public static final Creator<Customer> CREATOR = new Creator<Customer>() {
         @Override
-        public Worker createFromParcel(Parcel in) {
-            return new Worker(in);
+        public Customer createFromParcel(Parcel in) {
+            return new Customer(in);
         }
 
         @Override
-        public Worker[] newArray(int size) {
-            return new Worker[size];
+        public Customer[] newArray(int size) {
+            return new Customer[size];
         }
     };
 
@@ -102,23 +93,6 @@ public class Worker implements Parcelable {
     public String getPhotoUrl() {
         return photoUrl;
     }
-
-    public List<Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<Skill> skills) {
-        this.skills = skills;
-    }
-
-    public List<String> getCredentials() {
-        return credentials;
-    }
-
-    public void setCredentials(List<String> credentials) {
-        this.credentials = credentials;
-    }
-
 
     public String getDescription() {
         return description;

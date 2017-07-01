@@ -3,7 +3,6 @@ package com.mamaai.angelhack2017.details;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.mamaai.angelhack2017.R;
 import com.mamaai.angelhack2017.model.Worker;
@@ -25,7 +24,6 @@ public class DetailsActivity extends AppCompatActivity {
             ft.add(R.id.layout_container, fragment);
             ft.commit();
         } else {
-            Toast.makeText(this, R.string.general_error, Toast.LENGTH_LONG).show();
             finish();
         }
     }

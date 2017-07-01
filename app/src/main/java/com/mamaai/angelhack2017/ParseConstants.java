@@ -22,4 +22,20 @@ public class ParseConstants {
         public static final String FIELD_PRICE = "price";
         public static final String FIELD_WORKER = "worker";
     }
+
+    public static class Schedule {
+        public static final String TYPE = "Schedule";
+        public static final String FIELD_DATETIME = "scheduledDate";
+        public static final String FIELD_WORKER = "worker";
+        public static final String FIELD_SKILL = "skill";
+        public static final String FIELD_CUSTOMER = "customer";
+        public static final String FIELD_MESSAGE = "message";
+    }
+
+    public static class Customer {
+        public static final String TYPE = "Customer";
+        public static final String FIELD_NAME = "name";
+        public static final String FIELD_AGE = "age";
+        public static final String FIELD_PHOTO = "photo";
+    }
 }
