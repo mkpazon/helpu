@@ -3,6 +3,7 @@ package com.mamaai.angelhack2017.schedule;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -223,6 +224,7 @@ public class ScheduleFragment extends Fragment implements TimePickerDialog.OnTim
                         @Override
                         public void onComplete() {
                             Timber.d("-> .onComplete");
+                            showSuccessfulBookingScreen();
                         }
 
                         @Override
@@ -234,6 +236,12 @@ public class ScheduleFragment extends Fragment implements TimePickerDialog.OnTim
             Toast.makeText(getActivity(), "Kindly complete all the required details", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    private void showSuccessfulBookingScreen() {
+        getActivity().finish();
+        Intent intent = new Intent(getActivity(), BookingRequestSentActivity.class);
+        startActivity(intent);
     }
 
     @Override
