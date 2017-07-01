@@ -3,4 +3,5 @@
     <string name="general_error">Something went wrong</string>
     <string name="description">Description</string>
     <string name="services_rates">Services and Rates</string>
+    <string name="hire_this_worker">Hire this worker</string>
 </resources>
