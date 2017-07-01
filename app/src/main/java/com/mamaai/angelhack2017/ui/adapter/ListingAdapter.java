@@ -8,11 +8,13 @@ import android.widget.TextView;
 
 import com.mamaai.angelhack2017.R;
 import com.mamaai.angelhack2017.model.Worker;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by mkpazon on 01/07/2017.
@@ -36,6 +38,8 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         Worker worker = mItems.get(position);
         holder.mTvName.setText(worker.getName());
+        holder.mTvLocation.setText(worker.getLocation());
+        ImageLoader.getInstance().displayImage(worker.getPhotoUrl(), holder.mIvWorker);
     }
 
     @Override
@@ -51,6 +55,12 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
 
         @BindView(R.id.textView_name)
         TextView mTvName;
+
+        @BindView(R.id.imageView_worker)
+        CircleImageView mIvWorker;
+
+        @BindView(R.id.textView_location)
+        TextView mTvLocation;
 
         public ViewHolder(View itemView) {
             super(itemView);

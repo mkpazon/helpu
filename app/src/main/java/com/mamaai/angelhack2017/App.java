@@ -3,6 +3,11 @@ package com.mamaai.angelhack2017;
 import android.app.Application;
 
 import com.facebook.stetho.Stetho;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.parse.Parse;
 
 import okhttp3.OkHttpClient;
@@ -36,5 +41,23 @@ public class App extends Application {
                 .clientBuilder(httpClientBuilder)
                 .build();
         Parse.initialize(configuration);
+
+        configImageLoader();
+    }
+
+    private void configImageLoader() {
+        final DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder()
+                .displayer(new FadeInBitmapDisplayer(200))
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
+
+        final ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .threadPoolSize(5)
+                .defaultDisplayImageOptions(displayImageOptions)
+                .denyCacheImageMultipleSizesInMemory()
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .build();
+        ImageLoader.getInstance().init(config);
     }
 }

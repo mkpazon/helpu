@@ -9,9 +9,18 @@ public class Worker {
     private int age;
     private String photoUrl;
     private String[] skills;
+    private String location;
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public void setAge(int age) {
