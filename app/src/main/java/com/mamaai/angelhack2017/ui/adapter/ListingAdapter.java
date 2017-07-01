@@ -42,11 +42,11 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         holder.mTvLocation.setText(worker.getLocation());
         ImageLoader.getInstance().displayImage(worker.getPhotoUrl(), holder.mIvWorker);
         holder.mLayoutCredentials.removeAllViews();
-        List<String> skills = worker.getSkills();
-        for (String skill : skills) {
+        List<String> credentials = worker.getCredentials();
+        for (String credential : credentials) {
             View view = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.item_credential, holder.mLayoutCredentials, false);
             TextView tvCredential = (TextView) view.findViewById(R.id.textView_credential);
-            tvCredential.setText(skill);
+            tvCredential.setText(credential);
             holder.mLayoutCredentials.addView(view);
         }
     }
@@ -73,6 +73,9 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
 
         @BindView(R.id.layout_credentials)
         LinearLayout mLayoutCredentials;
+
+        @BindView(R.id.textView_skills)
+        TextView mTvSkills;
 
         public ViewHolder(View itemView) {
             super(itemView);

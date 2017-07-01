@@ -13,6 +13,7 @@ public class ParseConstants {
         public static final String FIELD_PHOTO = "photo";
         public static final String FIELD_LOCATION = "location";
         public static final String FIELD_SKILLS = "skills";
+        public static final String FIELD_CREDENTIALS = "credentials";
     }
 
     public static class Skill {

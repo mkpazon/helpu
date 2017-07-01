@@ -12,6 +12,7 @@ public class Worker {
     private int age;
     private String photoUrl;
     private List<String> skills = new ArrayList<>();
+    private List<String> credentials = new ArrayList<>();
     private String location;
 
     public void setName(String name) {
@@ -48,6 +49,14 @@ public class Worker {
 
     public List<String> getSkills() {
         return skills;
+    }
+
+    public List<String> getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(List<String> credentials) {
+        this.credentials = credentials;
     }
 
     public void setSkills(List<String> skills) {

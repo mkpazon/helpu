@@ -28,8 +28,8 @@ public class ParseConverter {
         worker.setLocation(parseObject.getString(ParseConstants.Worker.FIELD_LOCATION));
 
         // TODO
-        List<String> skills = parseObject.getList(ParseConstants.Worker.FIELD_SKILLS);
-        worker.setSkills(skills);
+        List<String> credentials = parseObject.getList(ParseConstants.Worker.FIELD_CREDENTIALS);
+        worker.setCredentials(credentials);
         return worker;
     }
 }
