@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">AngelHack2017</string>
+    <string name="app_name">HelpU</string>
+    <string name="general_error">Something went wrong</string>
+    <string name="description">Description</string>
+    <string name="services_rates">Services and Rates</string>
+    <string name="hire_this_worker">Hire this worker</string>
+    <string name="service_type">Service Type</string>
+    <string name="tap_to_select">Tap to Select</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="book_now">Book Now</string>
+    <string name="message">Message</string>
+    <string name="message_hint">ex. More details, Special Instruction, etc</string>
+    <string name="waiting_for_confirmation_from_the_worker">Waiting for Confirmation from the worker</string>
+    <string name="please_wait_until_the_confirmation">Please wait until the confirmation.</string>
+    <string name="average_confirmation_will_take_2_3_hours">Average confirmation will take 2–3 hours.</string>
 </resources>

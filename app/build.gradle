@@ -10,6 +10,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "parse_app_id", '"bitbitbitbit1234567890FreeBeesAppId"'
+        buildConfigField "String", "parse_client_key", '"bitbitbitbit1234567890FreeBeesAndroidClientKey"'
+        buildConfigField "String", "API_ROOT_URL", '"http://54.165.254.47:1339/parse"'
     }
     buildTypes {
         release {
@@ -24,26 +27,31 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
 
-    compile 'io.reactivex.rxjava2:rxjava:2.0.9'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.jakewharton.timber:timber:4.5.1'
-    debugCompile 'com.facebook.stetho:stetho:1.5.0'
-    debugCompile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-    compile 'com.parse:parse-android:1.15.7'
-    compile 'com.parse:parsetwitterutils-android:1.10.6'
-    compile('com.parse:parse-livequery-android:1.0.4', {
-        exclude group: 'com.parse', module: 'parse-android'
-    })
-    compile 'com.parse:parsefacebookutils-v4-android:1.10.4@aar'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile('com.facebook.android:facebook-android-sdk:4.8.2') {
         exclude module: 'bolts-android'
         exclude module: 'support-v4'
     }
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.9'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.jakewharton.timber:timber:4.5.1'
+    compile 'com.parse:parse-android:1.15.7'
+    compile 'com.parse:parsetwitterutils-android:1.10.6'
+    compile 'com.parse:parsefacebookutils-v4-android:1.10.4@aar'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.jakewharton:butterknife:8.6.0'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.android.support:design:25.3.1'
+    testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    debugCompile 'com.facebook.stetho:stetho:1.5.0'
+    debugCompile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
