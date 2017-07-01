@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mamaai.angelhack2017.R;
@@ -40,6 +41,14 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         holder.mTvName.setText(worker.getName());
         holder.mTvLocation.setText(worker.getLocation());
         ImageLoader.getInstance().displayImage(worker.getPhotoUrl(), holder.mIvWorker);
+        holder.mLayoutCredentials.removeAllViews();
+        List<String> skills = worker.getSkills();
+        for (String skill : skills) {
+            View view = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.item_credential, holder.mLayoutCredentials, false);
+            TextView tvCredential = (TextView) view.findViewById(R.id.textView_credential);
+            tvCredential.setText(skill);
+            holder.mLayoutCredentials.addView(view);
+        }
     }
 
     @Override
@@ -51,7 +60,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         mItems.addAll(workers);
     }
 
-    public static class ViewHolder extends  RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.textView_name)
         TextView mTvName;
@@ -61,6 +70,9 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
 
         @BindView(R.id.textView_location)
         TextView mTvLocation;
+
+        @BindView(R.id.layout_credentials)
+        LinearLayout mLayoutCredentials;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -31,7 +31,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="8dp"
-                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_color="@color/colorAccent"
                 app:civ_border_width="2dp" />
 
             <LinearLayout
@@ -52,6 +52,12 @@
                     android:id="@+id/textView_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:id="@+id/layout_credentials"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

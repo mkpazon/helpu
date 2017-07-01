@@ -1,14 +1,17 @@
 package com.mamaai.angelhack2017.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by mkpazon on 01/07/2017.
  */
 
 public class Worker {
-    private String name ;
+    private String name;
     private int age;
     private String photoUrl;
-    private String[] skills;
+    private List<String> skills = new ArrayList<>();
     private String location;
 
     public void setName(String name) {
@@ -31,10 +34,6 @@ public class Worker {
         this.photoUrl = photoUrl;
     }
 
-    public void setSkills(String[] skills) {
-        this.skills = skills;
-    }
-
     public String getName() {
         return name;
     }
@@ -47,7 +46,11 @@ public class Worker {
         return photoUrl;
     }
 
-    public String[] getSkills() {
+    public List<String> getSkills() {
         return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
     }
 }

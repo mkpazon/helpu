@@ -5,6 +5,8 @@ import com.mamaai.angelhack2017.model.Worker;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 
+import java.util.List;
+
 /**
  * Created by mkpazon on 01/07/2017.
  */
@@ -14,7 +16,7 @@ public class ParseConverter {
 
     }
 
-    public static Worker toWorker (ParseObject parseObject) {
+    public static Worker toWorker(ParseObject parseObject) {
         Worker worker = new Worker();
         worker.setName(parseObject.getString(ParseConstants.Worker.FIELD_NAME));
         worker.setAge(parseObject.getInt(ParseConstants.Worker.FIELD_AGE));
@@ -26,8 +28,8 @@ public class ParseConverter {
         worker.setLocation(parseObject.getString(ParseConstants.Worker.FIELD_LOCATION));
 
         // TODO
-        //  ListparseObject.getList(ParseConstants.Worker.FIELD_SKILLS)
-        //  worker.setSkills();
+        List<String> skills = parseObject.getList(ParseConstants.Worker.FIELD_SKILLS);
+        worker.setSkills(skills);
         return worker;
     }
 }
