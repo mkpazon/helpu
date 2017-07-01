@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "640916379005",
+    "firebase_url": "https://ah2017-109cd.firebaseio.com",
+    "project_id": "ah2017-109cd",
+    "storage_bucket": "ah2017-109cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640916379005:android:057f6a79e2dcf638",
+        "android_client_info": {
+          "package_name": "com.mamaai.angelhack2017"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640916379005-vf8hh5cf28mr7cavl5su3geb5qv94ckc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_Y7kt5PhwbELrEdDA1jbgK1sNCaqYNOw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640916379005:android:79a7bcdb7a561333",
+        "android_client_info": {
+          "package_name": "com.mamaai.angelhack2017.worker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640916379005-vf8hh5cf28mr7cavl5su3geb5qv94ckc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_Y7kt5PhwbELrEdDA1jbgK1sNCaqYNOw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

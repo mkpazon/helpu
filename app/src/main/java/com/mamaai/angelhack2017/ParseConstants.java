@@ -26,6 +26,7 @@ public class ParseConstants {
     public static class Schedule {
         public static final String TYPE = "Schedule";
         public static final String FIELD_DATETIME = "scheduledDate";
+        public static final String FIELD_STATUS = "status";
         public static final String FIELD_WORKER = "worker";
         public static final String FIELD_SKILL = "skill";
         public static final String FIELD_CUSTOMER = "customer";

@@ -95,7 +95,7 @@ public class WorkerManager {
                 parseSchedule.put(ParseConstants.Schedule.FIELD_WORKER, parseWorker);
                 parseSchedule.put(ParseConstants.Schedule.FIELD_SKILL, parseSkill);
                 parseSchedule.put(ParseConstants.Schedule.FIELD_MESSAGE, message);
-
+                parseSchedule.put(ParseConstants.Schedule.FIELD_STATUS, "requested");
                 parseSchedule.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
