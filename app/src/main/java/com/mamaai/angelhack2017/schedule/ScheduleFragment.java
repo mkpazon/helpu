@@ -1,6 +1,7 @@
 package com.mamaai.angelhack2017.schedule;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,6 +35,10 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -45,6 +50,7 @@ import timber.log.Timber;
 public class ScheduleFragment extends Fragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     private static final String PARAM_WORKER = "worker";
+    private CompositeDisposable mDisposables = new CompositeDisposable();
 
     private Unbinder mUnbinder;
     private Calendar mCalendar;
@@ -66,6 +72,8 @@ public class ScheduleFragment extends Fragment implements TimePickerDialog.OnTim
     @BindView(R.id.spinner_skills)
     Spinner mSpinnerSkills;
 
+    @BindView(R.id.textView_price)
+    TextView mTvPrice;
 
     @Nullable
     @Override
@@ -116,6 +124,7 @@ public class ScheduleFragment extends Fragment implements TimePickerDialog.OnTim
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Timber.d(".onItemSelected : " + position);
                 mSkillSelected = skills.get(position);
+                mTvPrice.setText(String.valueOf(mSkillSelected.getPrice()));
             }
 
             @Override
@@ -193,9 +202,23 @@ public class ScheduleFragment extends Fragment implements TimePickerDialog.OnTim
 
         if (mWorker != null && mSkillSelected != null && mCalendar != null) {
             Timber.i("Booking schedule");
-            WorkerManager.bookSchedule(mWorker, customer, mSkillSelected, mCalendar, mEtMessage.getText().toString())
+            final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setTitle("Please wait while we process your request");
+            mDisposables.add(WorkerManager.bookSchedule(mWorker, customer, mSkillSelected, mCalendar, mEtMessage.getText().toString())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe(new Consumer<Disposable>() {
+                        @Override
+                        public void accept(@NonNull Disposable disposable) throws Exception {
+                            progressDialog.show();
+                        }
+                    })
+                    .doAfterTerminate(new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            progressDialog.dismiss();
+                        }
+                    })
                     .subscribeWith(new DisposableCompletableObserver() {
                         @Override
                         public void onComplete() {
@@ -206,10 +229,16 @@ public class ScheduleFragment extends Fragment implements TimePickerDialog.OnTim
                         public void onError(@NonNull Throwable e) {
                             Timber.e(e, ".onError");
                         }
-                    });
+                    }));
         } else {
             Toast.makeText(getActivity(), "Kindly complete all the required details", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mDisposables.dispose();
     }
 }

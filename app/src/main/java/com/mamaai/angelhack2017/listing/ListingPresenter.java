@@ -27,7 +27,7 @@ class ListingPresenter {
 
     void onActivityCreated() {
         Timber.d(".onActivityCreated");
-        WorkerManager.retrieveWorkers()
+        mDisposables.add(WorkerManager.retrieveWorkers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<Worker>>() {
@@ -46,7 +46,7 @@ class ListingPresenter {
                     public void onComplete() {
                         Timber.d(".onComplete");
                     }
-                });
+                }));
     }
 
 
