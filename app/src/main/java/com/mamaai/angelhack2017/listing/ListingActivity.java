@@ -7,7 +7,7 @@ import com.mamaai.angelhack2017.R;
 
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+public class ListingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,8 +15,5 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
     }
 }

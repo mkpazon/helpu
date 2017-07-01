@@ -19,10 +19,10 @@ import timber.log.Timber;
 class ListingPresenter {
 
     private CompositeDisposable mDisposables = new CompositeDisposable();
-    private ListingView mListingView;
+    private ListingView mView;
 
     ListingPresenter(ListingView listingView) {
-        mListingView = listingView;
+        mView = listingView;
     }
 
     void onActivityCreated() {
@@ -34,7 +34,7 @@ class ListingPresenter {
                     @Override
                     public void onNext(@NonNull List<Worker> workers) {
                         Timber.d(".onNext");
-                        mListingView.populateRecyclerView(workers);
+                        mView.populateRecyclerView(workers);
                     }
 
                     @Override
@@ -52,5 +52,9 @@ class ListingPresenter {
 
     public void dispose() {
         mDisposables.dispose();
+    }
+
+    public void onItemClick(Worker worker) {
+        mView.startDetailsActivity(worker);
     }
 }

@@ -23,11 +23,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHolder> {
 
-
     private List<Worker> mItems;
+    private ListingListener mListener;
 
-    public ListingAdapter(List<Worker> items) {
+    public ListingAdapter(List<Worker> items, ListingListener listener) {
         mItems = items;
+        mListener = listener;
     }
 
     @Override
@@ -36,8 +37,8 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Worker worker = mItems.get(position);
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        final Worker worker = mItems.get(position);
         holder.mTvName.setText(worker.getName());
         holder.mTvLocation.setText(worker.getLocation());
         ImageLoader.getInstance().displayImage(worker.getPhotoUrl(), holder.mIvWorker);
@@ -49,6 +50,15 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
             tvCredential.setText(credential);
             holder.mLayoutCredentials.addView(view);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onItemClick(worker, position);
+                }
+            }
+        });
     }
 
     @Override
@@ -81,5 +91,9 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface ListingListener {
+        void onItemClick(Worker worker, int position);
     }
 }

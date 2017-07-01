@@ -1,5 +1,6 @@
 package com.mamaai.angelhack2017.listing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mamaai.angelhack2017.R;
+import com.mamaai.angelhack2017.details.DetailsActivity;
 import com.mamaai.angelhack2017.model.Worker;
 import com.mamaai.angelhack2017.ui.adapter.ListingAdapter;
 
@@ -25,7 +27,7 @@ import timber.log.Timber;
  * Created by mkpazon on 01/07/2017.
  */
 
-public class ListingFragment extends Fragment implements ListingView {
+public class ListingFragment extends Fragment implements ListingView, ListingAdapter.ListingListener {
 
     private Unbinder mUnbinder;
     private ListingPresenter mPresenter;
@@ -44,7 +46,7 @@ public class ListingFragment extends Fragment implements ListingView {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRvListings.setLayoutManager(layoutManager);
 
-        mAdapter = new ListingAdapter(new ArrayList<Worker>());
+        mAdapter = new ListingAdapter(new ArrayList<Worker>(), this);
         mRvListings.setAdapter(mAdapter);
         return view;
     }
@@ -73,5 +75,17 @@ public class ListingFragment extends Fragment implements ListingView {
     public void populateRecyclerView(List<Worker> workers) {
         mAdapter.addAll(workers);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void startDetailsActivity(Worker worker) {
+        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(Worker worker, int position) {
+        Timber.d(".onItemClick:" + position);
+        mPresenter.onItemClick(worker);
     }
 }

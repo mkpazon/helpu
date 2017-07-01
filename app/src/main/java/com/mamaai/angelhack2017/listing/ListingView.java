@@ -10,4 +10,6 @@ import java.util.List;
 
 interface ListingView {
     void populateRecyclerView(List<Worker> workers);
+
+    void startDetailsActivity(Worker worker);
 }
