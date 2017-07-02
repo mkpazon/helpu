@@ -5,6 +5,12 @@ package com.mamaai.angelhack2017;
  */
 
 public class ParseConstants {
+
+    public static final class Installation {
+        public static final String FIELD_CHANNELS = "channels";
+        public static final String FIELD_FCM_TOKEN = "fcmToken";
+    }
+
     public static class Worker {
         public static final String TYPE = "Worker";
         public static final String FIELD_NAME = "name";

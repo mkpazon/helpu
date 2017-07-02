@@ -9,6 +9,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.SaveCallback;
 
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
@@ -41,6 +44,13 @@ public class App extends Application {
                 .clientBuilder(httpClientBuilder)
                 .build();
         Parse.initialize(configuration);
+
+        ParseInstallation.getCurrentInstallation().saveEventually(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                Timber.d(".done");
+            }
+        });
 
         configImageLoader();
     }
