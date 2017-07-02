@@ -22,4 +22,7 @@
     <string name="booking_requests">Booking Requests</string>
     <string name="status_requested">REQUESTED</string>
     <string name="per_session_is_approximately_1_day">* per session is approximately 6 – 8 hours</string>
+    <string name="ok">OK</string>
+    <string name="house_cleaning_description">House Cleaning involves getting rid of mess, trash, dirt through sweeping, mopping and dusting</string>
+    <string name="definition">Definition</string>
 </resources>

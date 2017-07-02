@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.mamaai.angelhack2017.R;
 import com.mamaai.angelhack2017.model.Skill;
 import com.mamaai.angelhack2017.model.Worker;
 import com.mamaai.angelhack2017.schedule.ScheduleActivity;
+import com.mamaai.angelhack2017.ui.dialog.InfoDialogFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -139,6 +141,14 @@ public class DetailsFragment extends Fragment {
             TextView tvSkillName = (TextView) view.findViewById(R.id.textView_skillName);
             tvSkillName.setText(skill.getName());
             TextView tvPrice = (TextView) view.findViewById(R.id.textView_price);
+            ImageView ivSkillInfo = (ImageView) view.findViewById(R.id.imageView_skill_info);
+            ivSkillInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    InfoDialogFragment.newInstance(getString(R.string.definition), getString(R.string.house_cleaning_description))
+                            .show(getFragmentManager(), "infoDialog");
+                }
+            });
             tvPrice.setText(String.format(Locale.getDefault(), "P%.2f per session", skill.getPrice()));
             mLayoutServices.addView(view);
         }
