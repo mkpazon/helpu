@@ -1,18 +1,22 @@
 package com.mamaai.angelhack2017.ui.adapter;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mamaai.angelhack2017.R;
 import com.mamaai.angelhack2017.model.Schedule;
+import com.mamaai.angelhack2017.model.Skill;
 import com.mamaai.angelhack2017.model.Worker;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,15 +28,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapter.ViewHolder> {
 
+    private SimpleDateFormat mDateFormatter = new SimpleDateFormat("MMM dd yyyy, hh:mm a", Locale.getDefault());
+
+    private Context mContext;
     private List<Schedule> mItems;
 
-    public ScheduleListAdapter(List<Schedule> items) {
+    public ScheduleListAdapter(Context context, List<Schedule> items) {
+        mContext = context;
         mItems = items;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listing, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_schedule_list, parent, false));
     }
 
     @Override
@@ -40,16 +48,26 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
         final Schedule schedule = mItems.get(position);
         final Worker worker = schedule.getWorker();
         holder.mTvName.setText(worker.getName());
-        holder.mTvLocation.setText(worker.getLocation());
         ImageLoader.getInstance().displayImage(worker.getPhotoUrl(), holder.mIvWorker);
-        holder.mLayoutCredentials.removeAllViews();
-        List<String> credentials = worker.getCredentials();
-        for (String credential : credentials) {
-            View view = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.item_credential, holder.mLayoutCredentials, false);
-            TextView tvCredential = (TextView) view.findViewById(R.id.textView_credential);
-            tvCredential.setText(credential);
-            holder.mLayoutCredentials.addView(view);
+        String status = schedule.getStatus();
+        if (status != null) {
+            holder.mTvStatus.setText(schedule.getStatus());
+
+            if (Schedule.STATUS_REJECTED.equals(status)) {
+                holder.mTvStatus.setTextColor(ContextCompat.getColor(mContext, R.color.status_rejected));
+            } else if (Schedule.STATUS_CONFIRMED.equals(status)) {
+                holder.mTvStatus.setTextColor(ContextCompat.getColor(mContext, R.color.status_confirmed));
+            } else {
+                holder.mTvStatus.setTextColor(ContextCompat.getColor(mContext, R.color.status_default));
+            }
+        } else {
+            holder.mTvStatus.setText(R.string.status_requested);
         }
+        holder.mTvDateTime.setText(mDateFormatter.format(schedule.getDate()));
+        Skill skill = schedule.getSkill();
+        holder.mTvSkill.setText(skill.getName());
+        // TODO format this to 2 decimal places
+        holder.mTvPrice.setText(String.valueOf(skill.getPrice()));
     }
 
     @Override
@@ -69,14 +87,17 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
         @BindView(R.id.imageView_worker)
         CircleImageView mIvWorker;
 
-        @BindView(R.id.textView_location)
-        TextView mTvLocation;
+        @BindView(R.id.textView_status)
+        TextView mTvStatus;
 
-        @BindView(R.id.layout_credentials)
-        LinearLayout mLayoutCredentials;
+        @BindView(R.id.textView_skill)
+        TextView mTvSkill;
 
-        @BindView(R.id.textView_skills)
-        TextView mTvSkills;
+        @BindView(R.id.textView_dateTime)
+        TextView mTvDateTime;
+
+        @BindView(R.id.textView_price)
+        TextView mTvPrice;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:text="@string/average_confirmation_will_take_2_3_hours"
+        android:text="@string/average_confirmation_time"
         android:textAlignment="center"
         android:textColor="#32b275"
         android:textSize="18sp" />

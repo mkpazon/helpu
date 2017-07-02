@@ -7,6 +7,7 @@ import com.mamaai.angelhack2017.model.Worker;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,10 +50,13 @@ public class ParseConverter {
         Schedule schedule = new Schedule();
         ParseObject parseSkill = parseObject.getParseObject(ParseConstants.Schedule.FIELD_SKILL);
         ParseObject parseWorker = parseObject.getParseObject(ParseConstants.Schedule.FIELD_WORKER);
+        Date date = parseObject.getDate(ParseConstants.Schedule.FIELD_DATETIME);
+        schedule.setDate(date);
         Skill skill = toSkill(parseSkill);
         Worker worker = toWorker(parseWorker);
         schedule.setSkill(skill);
         schedule.setWorker(worker);
+        schedule.setStatus(parseObject.getString(ParseConstants.Schedule.FIELD_STATUS));
         return schedule;
     }
 }

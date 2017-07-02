@@ -56,7 +56,10 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".schedule.request.ScheduleListActivity"></activity>
+        <activity
+            android:name=".schedule.request.ScheduleListActivity"
+            android:parentActivityName=".listing.ListingActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

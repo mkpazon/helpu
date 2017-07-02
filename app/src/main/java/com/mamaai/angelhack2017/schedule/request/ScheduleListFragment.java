@@ -53,7 +53,7 @@ public class ScheduleListFragment extends Fragment {
         mUnbinder = ButterKnife.bind(this, view);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRvSchedules.setLayoutManager(layoutManager);
-        mAdapter = new ScheduleListAdapter(new ArrayList<Schedule>());
+        mAdapter = new ScheduleListAdapter(getActivity(), new ArrayList<Schedule>());
         mRvSchedules.setAdapter(mAdapter);
         return view;
     }
