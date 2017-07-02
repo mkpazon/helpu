@@ -8,9 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mamaai.angelhack2017.ApiHelper;
 import com.mamaai.angelhack2017.R;
+import com.mamaai.angelhack2017.model.Schedule;
 
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -41,7 +49,7 @@ public class ScheduleListFragment extends Fragment {
         // TODO change this to a non-hardcoded customer id eventually.
         String customerId = "fgVUaZSMxa";
 
-        /*mDisposables.add(ApiHelper.retrieveSchedules(customerId)
+        mDisposables.add(ApiHelper.retrieveSchedules(customerId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<Schedule>>() {
@@ -60,7 +68,7 @@ public class ScheduleListFragment extends Fragment {
                     public void onComplete() {
                         Timber.d(".onComplete");
                     }
-                }));*/
+                }));
     }
 
     @Override

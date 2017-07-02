@@ -119,6 +119,7 @@ public class ApiHelper {
                 query.include(ParseConstants.Schedule.FIELD_WORKER);
                 query.include(ParseConstants.Schedule.FIELD_CUSTOMER);
                 query.include(ParseConstants.Schedule.FIELD_SKILL);
+                query.include(ParseConstants.Schedule.FIELD_SKILL + "." + ParseConstants.Skill.FIELD_WORKER);
                 query.findInBackground(new FindCallback<ParseObject>() {
                     @Override
                     public void done(List<ParseObject> parseObjects, ParseException e) {
@@ -137,5 +138,4 @@ public class ApiHelper {
             }
         });
     }
-
 }
