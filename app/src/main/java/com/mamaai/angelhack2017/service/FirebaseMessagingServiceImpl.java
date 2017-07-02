@@ -93,7 +93,7 @@ public class FirebaseMessagingServiceImpl extends FirebaseMessagingService {
         final Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_launcher_transparent_bg)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(message)
