@@ -66,8 +66,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
         holder.mTvDateTime.setText(mDateFormatter.format(schedule.getDate()));
         Skill skill = schedule.getSkill();
         holder.mTvSkill.setText(skill.getName());
-        // TODO format this to 2 decimal places
-        holder.mTvPrice.setText(String.valueOf(skill.getPrice()));
+        holder.mTvPrice.setText(String.format(Locale.getDefault(), "P%.2f", skill.getPrice()));
     }
 
     @Override
@@ -79,7 +78,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
         mItems.addAll(schedules);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.textView_name)
         TextView mTvName;
@@ -99,7 +98,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
         @BindView(R.id.textView_price)
         TextView mTvPrice;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

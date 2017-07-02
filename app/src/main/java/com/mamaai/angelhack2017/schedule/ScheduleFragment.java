@@ -114,7 +114,7 @@ public class ScheduleFragment extends Fragment implements TimePickerDialog.OnTim
         String[] skillArr = new String[skills.size()];
         for (int i = 0; i < skillArr.length; i++) {
             Skill skill = skills.get(i);
-            skillArr[i] = skill.getName() + " - " + skill.getPrice();
+            skillArr[i] = skill.getName() + " - " + String.format(Locale.getDefault(), "P%.2f", skill.getPrice());
         }
 
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, skillArr);
@@ -125,7 +125,7 @@ public class ScheduleFragment extends Fragment implements TimePickerDialog.OnTim
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Timber.d(".onItemSelected : " + position);
                 mSkillSelected = skills.get(position);
-                mTvPrice.setText(String.valueOf(mSkillSelected.getPrice()));
+                mTvPrice.setText(String.format(Locale.getDefault(), "P%.2f", mSkillSelected.getPrice()));
             }
 
             @Override

@@ -11,14 +11,15 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mamaai.angelhack2017.R;
 import com.mamaai.angelhack2017.ApiHelper;
+import com.mamaai.angelhack2017.R;
 import com.mamaai.angelhack2017.model.Skill;
 import com.mamaai.angelhack2017.model.Worker;
 import com.mamaai.angelhack2017.schedule.ScheduleActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -116,7 +117,7 @@ public class DetailsFragment extends Fragment {
                     public void onNext(@NonNull List<Skill> skills) {
                         Timber.d(".onNext");
                         mWorker.setSkills(skills);
-                        populateRecyclerView(skills);
+                        populateSkills(skills);
                         mBtnHire.setEnabled(true);
                     }
 
@@ -132,13 +133,13 @@ public class DetailsFragment extends Fragment {
                 });
     }
 
-    private void populateRecyclerView(List<Skill> skills) {
+    private void populateSkills(List<Skill> skills) {
         for (Skill skill : skills) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_services, mLayoutServices, false);
             TextView tvSkillName = (TextView) view.findViewById(R.id.textView_skillName);
             tvSkillName.setText(skill.getName());
             TextView tvPrice = (TextView) view.findViewById(R.id.textView_price);
-            tvPrice.setText(String.valueOf(skill.getPrice()));
+            tvPrice.setText(String.format(Locale.getDefault(), "P%.2f per session", skill.getPrice()));
             mLayoutServices.addView(view);
         }
     }
