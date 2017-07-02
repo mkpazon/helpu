@@ -45,7 +45,6 @@ public class ListingFragment extends Fragment implements ListingView, ListingAda
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRvListings.setLayoutManager(layoutManager);
-
         mAdapter = new ListingAdapter(new ArrayList<Worker>(), this);
         mRvListings.setAdapter(mAdapter);
         return view;
