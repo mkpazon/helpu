@@ -3,9 +3,8 @@
     tools:context="com.bitbitbitbit.thefreebees.ui.activity.MapActivity">
 
     <item
-        android:id="@+id/login"
+        android:id="@+id/menu_booking_requests"
+        android:enabled="true"
         android:icon="@mipmap/ic_launcher"
-        android:title="Login" />
-
-
+        android:title="@string/booking_requests" />
 </menu>
