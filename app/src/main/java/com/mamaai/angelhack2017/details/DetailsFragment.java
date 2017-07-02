@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mamaai.angelhack2017.R;
-import com.mamaai.angelhack2017.WorkerManager;
+import com.mamaai.angelhack2017.ApiHelper;
 import com.mamaai.angelhack2017.model.Skill;
 import com.mamaai.angelhack2017.model.Worker;
 import com.mamaai.angelhack2017.schedule.ScheduleActivity;
@@ -108,7 +108,7 @@ public class DetailsFragment extends Fragment {
         }
 
         mTvDescription.setText(mWorker.getDescription());
-        WorkerManager.retrieveSkills(mWorker.getId())
+        ApiHelper.retrieveSkills(mWorker.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<Skill>>() {

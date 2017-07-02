@@ -32,10 +32,15 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".schedule.BookingRequestSentActivity"
+            android:parentActivityName=".listing.ListingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".schedule.BookingConfirmedActivity"
+            android:parentActivityName=".listing.ListingActivity"
             android:screenOrientation="portrait" />
 
         <service
-            android:name="com.mamaai.angelhack2017.service.FirebaseMessagingServiceImpl"
+            android:name=".service.FirebaseMessagingServiceImpl"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -51,6 +56,7 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".schedule.request.ScheduleListActivity"></activity>
     </application>
 
 </manifest>

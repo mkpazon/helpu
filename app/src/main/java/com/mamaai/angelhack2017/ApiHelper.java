@@ -1,6 +1,7 @@
 package com.mamaai.angelhack2017;
 
 import com.mamaai.angelhack2017.model.Customer;
+import com.mamaai.angelhack2017.model.Schedule;
 import com.mamaai.angelhack2017.model.Skill;
 import com.mamaai.angelhack2017.model.Worker;
 import com.mamaai.angelhack2017.util.ParseConverter;
@@ -27,7 +28,7 @@ import timber.log.Timber;
  * Created by mkpazon on 01/07/2017.
  */
 
-public class WorkerManager {
+public class ApiHelper {
 
     public static Observable<List<Worker>> retrieveWorkers() {
         Timber.d(".retrieveWorkers");
@@ -106,4 +107,35 @@ public class WorkerManager {
             }
         });
     }
+
+    public static Observable<List<Schedule>> retrieveSchedules(final String customerId) {
+        Timber.d(".retrieveWorkers");
+        return Observable.create(new ObservableOnSubscribe<List<Schedule>>() {
+            @Override
+            public void subscribe(@NonNull final ObservableEmitter<List<Schedule>> emitter) throws Exception {
+                ParseObject customer = ParseObject.createWithoutData(ParseConstants.Customer.TYPE, customerId);
+                ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseConstants.Schedule.TYPE);
+                query.whereEqualTo(ParseConstants.Schedule.FIELD_CUSTOMER, customer);
+                query.include(ParseConstants.Schedule.FIELD_WORKER);
+                query.include(ParseConstants.Schedule.FIELD_CUSTOMER);
+                query.include(ParseConstants.Schedule.FIELD_SKILL);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> parseObjects, ParseException e) {
+                        Timber.d(".retrieveWorkers -> .done");
+                        List<Schedule> schedules = new ArrayList<>();
+                        if (parseObjects != null) {
+                            for (ParseObject parseObject : parseObjects) {
+                                Schedule schedule = ParseConverter.toSchedule(parseObject);
+                                schedules.add(schedule);
+                            }
+                            emitter.onNext(schedules);
+                        }
+                        emitter.onComplete();
+                    }
+                });
+            }
+        });
+    }
+
 }

@@ -14,4 +14,9 @@
     <string name="waiting_for_confirmation_from_the_worker">Waiting for Confirmation from the worker</string>
     <string name="please_wait_until_the_confirmation">Please wait until the confirmation.</string>
     <string name="average_confirmation_will_take_2_3_hours">Average confirmation will take 2–3 hours.</string>
+    <string name="booking_confirmed">Booking Confirmed</string>
+    <string name="contact_worker_instruction">Please contact your worker to be sure you are on the same page</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

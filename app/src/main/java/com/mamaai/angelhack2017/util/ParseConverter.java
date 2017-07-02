@@ -1,6 +1,7 @@
 package com.mamaai.angelhack2017.util;
 
 import com.mamaai.angelhack2017.ParseConstants;
+import com.mamaai.angelhack2017.model.Schedule;
 import com.mamaai.angelhack2017.model.Skill;
 import com.mamaai.angelhack2017.model.Worker;
 import com.parse.ParseFile;
@@ -42,5 +43,16 @@ public class ParseConverter {
         Worker worker = toWorker(parseWorker);
         skill.setWorker(worker);
         return skill;
+    }
+
+    public static Schedule toSchedule(ParseObject parseObject) {
+        Schedule schedule = new Schedule();
+        ParseObject parseSkill = parseObject.getParseObject(ParseConstants.Schedule.FIELD_SKILL);
+        ParseObject parseWorker = parseObject.getParseObject(ParseConstants.Schedule.FIELD_WORKER);
+        Skill skill = toSkill(parseSkill);
+        Worker worker = toWorker(parseWorker);
+        schedule.setSkill(skill);
+        schedule.setWorker(worker);
+        return schedule;
     }
 }

@@ -1,6 +1,6 @@
 package com.mamaai.angelhack2017.listing;
 
-import com.mamaai.angelhack2017.WorkerManager;
+import com.mamaai.angelhack2017.ApiHelper;
 import com.mamaai.angelhack2017.model.Worker;
 
 import java.util.List;
@@ -27,7 +27,7 @@ class ListingPresenter {
 
     void onActivityCreated() {
         Timber.d(".onActivityCreated");
-        mDisposables.add(WorkerManager.retrieveWorkers()
+        mDisposables.add(ApiHelper.retrieveWorkers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<Worker>>() {

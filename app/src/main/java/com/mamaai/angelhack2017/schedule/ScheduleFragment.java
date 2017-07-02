@@ -20,7 +20,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.mamaai.angelhack2017.R;
-import com.mamaai.angelhack2017.WorkerManager;
+import com.mamaai.angelhack2017.ApiHelper;
 import com.mamaai.angelhack2017.model.Customer;
 import com.mamaai.angelhack2017.model.Skill;
 import com.mamaai.angelhack2017.model.Worker;
@@ -205,7 +205,7 @@ public class ScheduleFragment extends Fragment implements TimePickerDialog.OnTim
             Timber.i("Booking schedule");
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle("Please wait while we process your request");
-            mDisposables.add(WorkerManager.bookSchedule(mWorker, customer, mSkillSelected, mCalendar, mEtMessage.getText().toString())
+            mDisposables.add(ApiHelper.bookSchedule(mWorker, customer, mSkillSelected, mCalendar, mEtMessage.getText().toString())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe(new Consumer<Disposable>() {
