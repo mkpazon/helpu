@@ -116,6 +116,7 @@ public class ApiHelper {
                 ParseObject customer = ParseObject.createWithoutData(ParseConstants.Customer.TYPE, customerId);
                 ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseConstants.Schedule.TYPE);
                 query.whereEqualTo(ParseConstants.Schedule.FIELD_CUSTOMER, customer);
+                query.orderByAscending(ParseConstants.Schedule.FIELD_DATETIME);
                 query.include(ParseConstants.Schedule.FIELD_WORKER);
                 query.include(ParseConstants.Schedule.FIELD_CUSTOMER);
                 query.include(ParseConstants.Schedule.FIELD_SKILL);

@@ -7,5 +7,5 @@
     <color name="divider">#d5d5d5</color>
     <color name="status_confirmed">#009900</color>
     <color name="status_rejected">#CC0000</color>
-    <color name="status_default">#999999</color>
+    <color name="status_default">@color/colorPrimary</color>
 </resources>
