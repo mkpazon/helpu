@@ -104,6 +104,13 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/message_hint" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/per_session_is_approximately_1_day"
+                    android:textStyle="italic" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="100dp" />

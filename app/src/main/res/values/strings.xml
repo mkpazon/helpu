@@ -21,4 +21,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="booking_requests">Booking Requests</string>
     <string name="status_requested">REQUESTED</string>
+    <string name="per_session_is_approximately_1_day">* per session is approximately 6 – 8 hours</string>
 </resources>

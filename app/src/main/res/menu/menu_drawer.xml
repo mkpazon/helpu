@@ -5,6 +5,6 @@
     <item
         android:id="@+id/menu_booking_requests"
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_today_black_24dp"
         android:title="@string/booking_requests" />
 </menu>
